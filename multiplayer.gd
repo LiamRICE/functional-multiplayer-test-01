@@ -18,6 +18,8 @@ func _ready() -> void:
 	
 	#multiplayer.peer_disconnected.connect(_on_disconnection)
 	multiplayer.server_disconnected.connect(_on_disconnection)
+	multiplayer.connection_failed.connect(_on_connection_failed)
+	multiplayer.connected_to_server.connect(_on_connection_successful)
 
 
 func _on_host_pressed() -> void:
@@ -36,6 +38,14 @@ func _on_singleplayer_pressed() -> void:
 func _on_disconnection():
 	print("Disconnected!")
 	%MainUI.visible = true
+
+
+func _on_connection_failed():
+	_on_disconnection()
+
+
+func _on_connection_successful():
+	print("Connection Successful")
 
 
 func host_game(port:int=PORT):
@@ -61,7 +71,6 @@ func join_game(port:int=PORT):
 		return
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(ip_address, port)
-
 	print("Connection Status :", peer.get_connection_status())
 	print("CONNECTED: ", ENetMultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTED)
 	print("CONNECTING: ", ENetMultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTING)
