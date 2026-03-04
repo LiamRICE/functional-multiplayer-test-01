@@ -1,39 +1,99 @@
 [gd_scene format=3 uid="uid://wldfbfwr8dn2"]
 
 [ext_resource type="Script" uid="uid://ym2dtvlp42vm" path="res://multiplayer.gd" id="1_o4y1c"]
+[ext_resource type="Script" uid="uid://bml7p1m8wco75" path="res://ui_manager.gd" id="2_wktud"]
 
 [node name="Multiplayer" type="Node" unique_id=743440370]
 process_mode = 3
 script = ExtResource("1_o4y1c")
 
 [node name="UI" type="Control" parent="." unique_id=167570561]
+unique_name_in_owner = true
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_wktud")
 
-[node name="Net" type="VBoxContainer" parent="UI" unique_id=829517810]
+[node name="MainUI" type="Control" parent="UI" unique_id=526398685]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Net" type="VBoxContainer" parent="UI/MainUI" unique_id=829517810]
 layout_mode = 1
 offset_right = 290.0
 offset_bottom = 40.0
 
-[node name="Options" type="HBoxContainer" parent="UI/Net" unique_id=1105222295]
+[node name="Options" type="HBoxContainer" parent="UI/MainUI/Net" unique_id=1105222295]
 layout_mode = 2
 
-[node name="Host" type="Button" parent="UI/Net/Options" unique_id=37756137]
+[node name="Singleplayer" type="Button" parent="UI/MainUI/Net/Options" unique_id=1811942983]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Singleplayer"
+
+[node name="Host" type="Button" parent="UI/MainUI/Net/Options" unique_id=37756137]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Host"
 
-[node name="Connect" type="Button" parent="UI/Net/Options" unique_id=416203225]
+[node name="Connect" type="Button" parent="UI/MainUI/Net/Options" unique_id=416203225]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Join"
 
-[node name="Remote" type="TextEdit" parent="UI/Net/Options" unique_id=1355333870]
+[node name="Remote" type="TextEdit" parent="UI/MainUI/Net/Options" unique_id=1355333870]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "127.0.0.1"
+
+[node name="SettingsButton" type="Button" parent="UI/MainUI/Net/Options" unique_id=876699517]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitGameButton" type="Button" parent="UI/MainUI/Net/Options" unique_id=516778627]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="SettingsUI" type="Control" parent="UI" unique_id=694839226]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ConfirmButton" type="Button" parent="UI/SettingsUI" unique_id=1833170498]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 110.0
+offset_bottom = 66.0
+text = "Save Settings"
+
+[node name="GameMenuUI" type="Control" parent="UI" unique_id=1886660483]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GameMenuUI" unique_id=1335649723]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ResumeLevelButton" type="Button" parent="UI/GameMenuUI/HBoxContainer" unique_id=1158357559]
+layout_mode = 2
+text = "Resume"
+
+[node name="QuitLevelButton" type="Button" parent="UI/GameMenuUI/HBoxContainer" unique_id=1958576297]
+layout_mode = 2
+text = "Quit Game"
 
 [node name="Level" type="Node" parent="." unique_id=525876734]
 process_mode = 1
@@ -43,5 +103,11 @@ _spawnable_scenes = PackedStringArray("uid://dsqwyg2qkeyf0")
 spawn_path = NodePath("../Level")
 spawn_limit = 1
 
-[connection signal="pressed" from="UI/Net/Options/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="UI/Net/Options/Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="UI/MainUI/Net/Options/Singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="UI/MainUI/Net/Options/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/MainUI/Net/Options/Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="UI/MainUI/Net/Options/SettingsButton" to="UI" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="UI/MainUI/Net/Options/QuitGameButton" to="UI" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="UI/SettingsUI/ConfirmButton" to="UI" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="UI/GameMenuUI/HBoxContainer/ResumeLevelButton" to="." method="_on_resume_level_button_pressed"]
+[connection signal="pressed" from="UI/GameMenuUI/HBoxContainer/QuitLevelButton" to="." method="_on_quit_level_button_pressed"]

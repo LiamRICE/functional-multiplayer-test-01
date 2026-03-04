@@ -33,6 +33,5 @@ func _physics_process(_delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 
-	print("Velocity: ", velocity)
 	move_and_slide()
 	look_at(input_mouse)
