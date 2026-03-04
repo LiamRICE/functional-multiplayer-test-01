@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://wldfbfwr8dn2"]
+
+[ext_resource type="Script" uid="uid://ym2dtvlp42vm" path="res://multiplayer.gd" id="1_o4y1c"]
+
+[node name="Multiplayer" type="Node" unique_id=743440370]
+process_mode = 3
+script = ExtResource("1_o4y1c")
+
+[node name="UI" type="Control" parent="." unique_id=167570561]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Net" type="VBoxContainer" parent="UI" unique_id=829517810]
+layout_mode = 1
+offset_right = 290.0
+offset_bottom = 40.0
+
+[node name="Options" type="HBoxContainer" parent="UI/Net" unique_id=1105222295]
+layout_mode = 2
+
+[node name="Host" type="Button" parent="UI/Net/Options" unique_id=37756137]
+layout_mode = 2
+text = "Host"
+
+[node name="Connect" type="Button" parent="UI/Net/Options" unique_id=416203225]
+layout_mode = 2
+text = "Join"
+
+[node name="Remote" type="TextEdit" parent="UI/Net/Options" unique_id=1355333870]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="Level" type="Node" parent="." unique_id=525876734]
+process_mode = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=2051773390]
+_spawnable_scenes = PackedStringArray("uid://dsqwyg2qkeyf0")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[connection signal="pressed" from="UI/Net/Options/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/Net/Options/Connect" to="." method="_on_connect_pressed"]
