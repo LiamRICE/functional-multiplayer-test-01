@@ -37,7 +37,14 @@ func _on_singleplayer_pressed() -> void:
 
 func _on_disconnection():
 	print("Disconnected!")
+	change_level(null)
 	%MainUI.visible = true
+	%GameMenuUI.visible = false
+	paused = true
+	is_multiplayer = false
+	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	get_tree().paused = true
 
 
 func _on_connection_failed():
@@ -71,10 +78,6 @@ func join_game(port:int=PORT):
 		return
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(ip_address, port)
-	print("Connection Status :", peer.get_connection_status())
-	print("CONNECTED: ", ENetMultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTED)
-	print("CONNECTING: ", ENetMultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTING)
-	print("DISCONNECTED: ", ENetMultiplayerPeer.ConnectionStatus.CONNECTION_DISCONNECTED)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start multiplayer client.")
 		return
@@ -114,14 +117,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_quit_level_button_pressed() -> void:
-	change_level(null)
-	%MainUI.visible = true
-	%GameMenuUI.visible = false
-	paused = true
-	is_multiplayer = false
-	multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
-	get_tree().paused = true
+	_on_disconnection()
 
 
 func _on_resume_level_button_pressed() -> void:

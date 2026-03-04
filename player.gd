@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 50
+const SPEED = 100
 
 # Set by the authority, synchronized on spawn.
 @export var player := 1 :
