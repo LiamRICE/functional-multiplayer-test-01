@@ -13,6 +13,26 @@ func _ready() -> void:
 	GameMenuUI = %GameMenuUI
 	CreateServerUI = %CreateServerUI
 	JoinServerUI = %JoinServerUI
+	return_to_main_menu()
+
+
+func set_connect_options(steam_initialised:bool = false):
+	# Set the server and join options to "Steam" and "LAN" if Steam is initialised, or just "LAN" if not
+	var options:Array = []
+	if steam_initialised:
+		options.append("Steam")
+	options.append("LAN")
+	var i:int = 0
+	for option in options:
+		%CreateServerOptionButton.add_item(option)
+		%CreateServerOptionButton.set_item_metadata(i, {"name":option})
+		%JoinServerOptionButton.add_item(option)
+		%JoinServerOptionButton.set_item_metadata(i, {"name":option})
+		i += 1
+	# Set default selected item
+	if len(options) > 0:
+		%CreateServerOptionButton.select(0)
+		%JoinServerOptionButton.select(0)
 
 
 func _on_settings_button_pressed() -> void:
@@ -53,3 +73,7 @@ func return_to_main_menu() -> void:
 	GameMenuUI.visible = false
 	CreateServerUI.visible = false
 	JoinServerUI.visible = false
+
+
+func _on_singleplayer_pressed() -> void:
+	MainUI.visible = false

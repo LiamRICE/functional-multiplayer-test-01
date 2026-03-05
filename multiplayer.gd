@@ -6,6 +6,7 @@ var is_multiplayer:bool = false
 var is_host:bool = false
 
 # SteamLobby variables
+var steam_initialised:bool = false
 var lobby_id:int = -1
 var is_joining:bool = false
 
@@ -26,7 +27,9 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.connected_to_server.connect(_on_connection_successful)
 	
-	print("Steam initialised: ", Steam.steamInit(480, true))
+	steam_initialised = Steam.steamInit(480, true)
+	print("Steam initialised: ", steam_initialised)
+	%UI.set_connect_options(steam_initialised)
 	Steam.initRelayNetworkAccess()
 	Steam.lobby_created.connect(_on_steam_lobby_created)
 	Steam.lobby_joined.connect(_on_steam_lobby_joined)
@@ -34,12 +37,22 @@ func _ready() -> void:
 
 func _on_host_pressed() -> void:
 	# Start as server.
-	host_game()
+	var selected_metadata = %CreateServerOptionButton.get_selected_metadata()
+	print("Hosting Server on ", selected_metadata.get("name"))
+	if selected_metadata.get("name") == "LAN":
+		host_game()
+	elif selected_metadata.get("name") == "Steam":
+		host_game_steam()
 
 
 func _on_connect_pressed() -> void:
 	# Start as client.
-	join_game()
+	var selected_metadata = %JoinServerOptionButton.get_selected_metadata()
+	print("Joining Server on ", selected_metadata.get("name"))
+	if selected_metadata.get("name") == "LAN":
+		join_game()
+	elif selected_metadata.get("name") == "Steam":
+		join_game_steam()
 
 
 func _on_singleplayer_pressed() -> void:
@@ -118,7 +131,7 @@ func join_game_steam():
 
 
 func start_game():
-	# Hide the UI and unpause to start the game.
+	# Unpause to start the game.
 	get_tree().paused = false
 	paused = false
 	# Only change level on the server.

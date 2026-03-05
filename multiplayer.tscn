@@ -117,6 +117,10 @@ layout_mode = 2
 max_value = 16.0
 value = 4.0
 
+[node name="CreateServerOptionButton" type="OptionButton" parent="UI/CreateServerUI/VBoxContainer" unique_id=1719598580]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="StartServerButton" type="Button" parent="UI/CreateServerUI/VBoxContainer" unique_id=171622141]
 layout_mode = 2
 text = "Start Server"
@@ -152,6 +156,10 @@ custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 text = "127.0.0.1"
 
+[node name="JoinServerOptionButton" type="OptionButton" parent="UI/JoinServerUI/VBoxContainer" unique_id=426651294]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="JoinServerButton" type="Button" parent="UI/JoinServerUI/VBoxContainer" unique_id=1787957938]
 layout_mode = 2
 text = "Join Server"
@@ -169,6 +177,7 @@ spawn_path = NodePath("../Level")
 spawn_limit = 1
 
 [connection signal="pressed" from="UI/MainUI/Net/Options/Singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="UI/MainUI/Net/Options/Singleplayer" to="UI" method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="UI/MainUI/Net/Options/Host" to="UI" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/MainUI/Net/Options/Connect" to="UI" method="_on_connect_pressed"]
 [connection signal="pressed" from="UI/MainUI/Net/Options/SettingsButton" to="UI" method="_on_settings_button_pressed"]
