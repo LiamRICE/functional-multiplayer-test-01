@@ -12,7 +12,7 @@ var is_joining:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-# Start paused.
+	# Start paused.
 	get_tree().paused = paused
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
@@ -27,7 +27,8 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.connected_to_server.connect(_on_connection_successful)
 	
-	steam_initialised = Steam.steamInit(480, true)
+	var app_id = ProjectSettings.get_setting("steam/initialization/app_id", 480) # Reads Steam App ID from Project Settings, sets App ID to 480 (undeclared steam app) if not specified
+	steam_initialised = Steam.steamInit(app_id, true)
 	print("Steam initialised: ", steam_initialised)
 	%UI.set_connect_options(steam_initialised)
 	Steam.initRelayNetworkAccess()
