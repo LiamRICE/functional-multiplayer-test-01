@@ -27,6 +27,7 @@ func _exit_tree():
 
 
 func add_player(id: int):
+	print("Peer ", id, " connected.")
 	var character = preload("res://player.tscn").instantiate()
 	# Set player id.
 	character.player = id

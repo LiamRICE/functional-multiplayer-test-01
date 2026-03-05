@@ -164,6 +164,9 @@ func _input(event: InputEvent) -> void:
 func _on_steam_lobby_created(result:int, new_lobby_id:int):
 	if result == Steam.Result.RESULT_OK:
 		self.lobby_id = new_lobby_id
+		Steam.setLobbyJoinable(new_lobby_id, true)
+		Steam.setLobbyData(new_lobby_id, "name", "Liam's Lobby")
+		Steam.setLobbyData(new_lobby_id, "mode", "Mint Choc-Chip")
 		
 		var peer := SteamMultiplayerPeer.new()
 		peer.server_relay = true
@@ -176,7 +179,7 @@ func _on_steam_lobby_created(result:int, new_lobby_id:int):
 		print("Failed to initialise Steam Lobby.")
 
 
-func _on_steam_lobby_joined(new_lobby_id:int, permissions:int, blocked:bool, result:int):
+func _on_steam_lobby_joined(new_lobby_id:int, _permissions:int, _blocked:bool, result:int):
 	if !is_joining:
 		return
 	
