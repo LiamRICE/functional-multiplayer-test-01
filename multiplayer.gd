@@ -38,8 +38,7 @@ func _on_singleplayer_pressed() -> void:
 func _on_disconnection():
 	print("Disconnected!")
 	change_level(null)
-	%MainUI.visible = true
-	%GameMenuUI.visible = false
+	%UI.return_to_main_menu()
 	paused = true
 	is_multiplayer = false
 	multiplayer.multiplayer_peer.close()
@@ -88,7 +87,6 @@ func join_game(port:int=PORT):
 
 func start_game():
 	# Hide the UI and unpause to start the game.
-	%MainUI.hide()
 	get_tree().paused = false
 	paused = false
 	# Only change level on the server.
@@ -124,3 +122,8 @@ func _on_resume_level_button_pressed() -> void:
 	%GameMenuUI.visible = false
 	paused = false
 	get_tree().paused = paused
+
+
+func _on_quit_game_button_pressed() -> void:
+	#get_tree().quit()
+	print("Quit button pressed")
