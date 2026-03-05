@@ -20,6 +20,9 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_disconnection)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.connected_to_server.connect(_on_connection_successful)
+	
+	print("Steam initialised: ", Steam.steamInit(480, true))
+	Steam.initRelayNetworkAccess()
 
 
 func _on_host_pressed() -> void:
@@ -125,5 +128,5 @@ func _on_resume_level_button_pressed() -> void:
 
 
 func _on_quit_game_button_pressed() -> void:
-	#get_tree().quit()
 	print("Quit button pressed")
+	get_tree().quit()
