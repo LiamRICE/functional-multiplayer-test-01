@@ -20,6 +20,7 @@ script = ExtResource("2_wktud")
 
 [node name="MainUI" type="CanvasLayer" parent="UI" unique_id=1223499144]
 unique_name_in_owner = true
+visible = false
 
 [node name="Net" type="VBoxContainer" parent="UI/MainUI" unique_id=829517810]
 offset_right = 290.0
@@ -77,9 +78,12 @@ text = "Resume"
 layout_mode = 2
 text = "Quit Game"
 
+[node name="LobbyInfoLabel" type="RichTextLabel" parent="UI/GameMenuUI/HBoxContainer" unique_id=514207343]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="CreateServerUI" type="CanvasLayer" parent="UI" unique_id=1924160518]
 unique_name_in_owner = true
-visible = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CreateServerUI" unique_id=1799355143]
 custom_minimum_size = Vector2(200, 0)
@@ -97,6 +101,21 @@ text = "Create Server"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NumPlayersInputContainer" type="HBoxContainer" parent="UI/CreateServerUI/VBoxContainer" unique_id=46905669]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/CreateServerUI/VBoxContainer/NumPlayersInputContainer" unique_id=672651685]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Max Players"
+fit_content = true
+
+[node name="NumPlayersSpinBox" type="SpinBox" parent="UI/CreateServerUI/VBoxContainer/NumPlayersInputContainer" unique_id=290676309]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 16.0
+value = 4.0
 
 [node name="StartServerButton" type="Button" parent="UI/CreateServerUI/VBoxContainer" unique_id=171622141]
 layout_mode = 2

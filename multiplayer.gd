@@ -3,6 +3,11 @@ extends Node
 const PORT:int = 4433
 var paused:bool = true
 var is_multiplayer:bool = false
+var is_host:bool = false
+
+# SteamLobby variables
+var lobby_id:int = -1
+var is_joining:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,6 +28,8 @@ func _ready() -> void:
 	
 	print("Steam initialised: ", Steam.steamInit(480, true))
 	Steam.initRelayNetworkAccess()
+	Steam.lobby_created.connect(_on_steam_lobby_created)
+	Steam.lobby_joined.connect(_on_steam_lobby_joined)
 
 
 func _on_host_pressed() -> void:
@@ -31,6 +38,7 @@ func _on_host_pressed() -> void:
 
 
 func _on_connect_pressed() -> void:
+	# Start as client.
 	join_game()
 
 
@@ -44,6 +52,7 @@ func _on_disconnection():
 	%UI.return_to_main_menu()
 	paused = true
 	is_multiplayer = false
+	is_host = false
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	get_tree().paused = true
@@ -58,8 +67,10 @@ func _on_connection_successful():
 
 
 func host_game(port:int=PORT):
-	print("Pressed host")
+	### LOCALHOST VERSION ###
+	print("Initialising localhost... ")
 	is_multiplayer = true
+	is_host = true
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(port)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
@@ -70,10 +81,20 @@ func host_game(port:int=PORT):
 	start_game()
 
 
+func host_game_steam():
+	### STEAMWORKS VERSION ###
+	print("Initialising Steam lobby...")
+	var max_players = int(%NumPlayersSpinBox.value)
+	Steam.createLobby(Steam.LobbyType.LOBBY_TYPE_PUBLIC, max_players)
+	is_multiplayer = true
+	is_host = true
+
+
 func join_game(port:int=PORT):
+	### LOCALHOST VERSION ###
 	# Start as client.
 	is_multiplayer = true
-	print("Pressed connect")
+	print("Initialising connection...")
 	var ip_address : String = %Remote.text
 	if ip_address == "":
 		OS.alert("Need a remote to connect to.")
@@ -86,6 +107,14 @@ func join_game(port:int=PORT):
 	multiplayer.multiplayer_peer = peer
 	print("Game Joined")
 	start_game()
+
+
+func join_game_steam():
+	### STEAMWORKS VERSION ###
+	print("Initialising Steam Client connection...")
+	is_joining = true
+	var join_lobby_id:int = int(%Remote.text)
+	Steam.joinLobby(join_lobby_id)
 
 
 func start_game():
@@ -113,8 +142,41 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_menu"):
 		print("Game Menu action pressed")
 		paused = !paused
+		%LobbyInfoLabel.text = str(self.lobby_id)
 		%GameMenuUI.visible = paused
 		get_tree().paused = paused
+
+
+func _on_steam_lobby_created(result:int, new_lobby_id:int):
+	if result == Steam.Result.RESULT_OK:
+		self.lobby_id = new_lobby_id
+		
+		var peer := SteamMultiplayerPeer.new()
+		peer.server_relay = true
+		peer.create_host()
+		
+		multiplayer.multiplayer_peer = peer
+		print("Steam Lobby Created with ID = ", new_lobby_id)
+		start_game()
+	else:
+		print("Failed to initialise Steam Lobby.")
+
+
+func _on_steam_lobby_joined(new_lobby_id:int, permissions:int, blocked:bool, result:int):
+	if !is_joining:
+		return
+	
+	if result == Steam.Result.RESULT_OK:
+		self.lobby_id = new_lobby_id
+		var peer := SteamMultiplayerPeer.new()
+		peer.server_relay = true
+		peer.create_client(Steam.getLobbyOwner(new_lobby_id))
+		multiplayer.multiplayer_peer = peer
+		is_joining = false
+		print("Steam Lobby ", new_lobby_id, " Joined.")
+		start_game()
+	else:
+		print("Failed to join Steam Lobby.")
 
 
 func _on_quit_level_button_pressed() -> void:
@@ -130,3 +192,10 @@ func _on_resume_level_button_pressed() -> void:
 func _on_quit_game_button_pressed() -> void:
 	print("Quit button pressed")
 	get_tree().quit()
+
+
+func get_steam_lobby_info() -> Dictionary:
+	var lobby_info := {
+		"lobby_id": self.lobby_id
+	}
+	return lobby_info
