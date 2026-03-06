@@ -1,8 +1,12 @@
 extends Node2D
 
 const SPAWN_RANDOM := 5.0
+var PlayerSpawner:MultiplayerSpawner
 
 func _ready():
+	# Fetch nodes
+	PlayerSpawner = $MultiplayerSpawner
+	
 	# We only need to spawn players on the server.
 	if not multiplayer.is_server():
 		return
@@ -27,18 +31,8 @@ func _exit_tree():
 
 
 func add_player(id: int):
-	print("Peer ", id, " connected.")
-	var character = preload("res://player.tscn").instantiate()
-	# Set player id.
-	character.player = id
-	# Randomize character position.
-	var pos := Vector2.from_angle(randf() * 2 * PI)
-	character.position = Vector2(pos.x * SPAWN_RANDOM * randf(), pos.y * SPAWN_RANDOM * randf())
-	character.name = str(id)
-	$Players.add_child(character, true)
+	PlayerSpawner.add_player(id)
 
 
 func del_player(id: int):
-	if not $Players.has_node(str(id)):
-		return
-	$Players.get_node(str(id)).queue_free()
+	PlayerSpawner.del_player(id)
