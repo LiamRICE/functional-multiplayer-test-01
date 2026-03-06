@@ -30,3 +30,5 @@ replication_config = SubResource("SceneReplicationConfig_v8qja")
 position = Vector2(0, 0.40000004)
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("1_v7oki")
+
+[node name="Timer" type="Timer" parent="." unique_id=1288163688]
