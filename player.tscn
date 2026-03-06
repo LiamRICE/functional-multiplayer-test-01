@@ -41,3 +41,6 @@ replication_config = SubResource("SceneReplicationConfig_f50pn")
 [node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1963593242]
 replication_config = SubResource("SceneReplicationConfig_ij6vw")
 script = ExtResource("2_i3pqv")
+
+[node name="BulletSpawn" type="Marker2D" parent="." unique_id=1216078171]
+position = Vector2(19, 0)

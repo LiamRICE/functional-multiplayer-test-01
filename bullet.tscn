@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bykowjorgwesn"]
+
+[ext_resource type="Texture2D" uid="uid://ba7du36tsk3gb" path="res://bullet.png" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://bul8lx4hs6wsr" path="res://bullet.gd" id="1_v8qja"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rtl8c"]
+radius = 1.0
+height = 12.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v8qja"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Bullet" type="RigidBody2D" unique_id=968422653]
+mass = 0.1
+script = ExtResource("1_v8qja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=384200620]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rtl8c")
+
+[node name="BulletSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1112605618]
+replication_config = SubResource("SceneReplicationConfig_v8qja")
+
+[node name="Bullet" type="Sprite2D" parent="." unique_id=1557406209]
+position = Vector2(0, 0.40000004)
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("1_v7oki")

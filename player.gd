@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal bullet_fired(position:Vector2, direction:Vector2, rotation:float)
+
 const SPEED = 100
 
 # Set by the authority, synchronized on spawn.
