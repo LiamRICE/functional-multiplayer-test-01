@@ -64,7 +64,6 @@ text = "Save Settings"
 
 [node name="GameMenuUI" type="CanvasLayer" parent="UI" unique_id=122224958]
 unique_name_in_owner = true
-visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/GameMenuUI" unique_id=1335649723]
 offset_right = 40.0
@@ -78,12 +77,15 @@ text = "Resume"
 layout_mode = 2
 text = "Quit Game"
 
-[node name="LobbyInfoLabel" type="RichTextLabel" parent="UI/GameMenuUI/HBoxContainer" unique_id=514207343]
+[node name="LobbyInfoLabel" type="LineEdit" parent="UI/GameMenuUI/HBoxContainer" unique_id=1478968906]
 unique_name_in_owner = true
 layout_mode = 2
+editable = false
+expand_to_text_length = true
 
 [node name="CreateServerUI" type="CanvasLayer" parent="UI" unique_id=1924160518]
 unique_name_in_owner = true
+visible = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CreateServerUI" unique_id=1799355143]
 custom_minimum_size = Vector2(200, 0)
