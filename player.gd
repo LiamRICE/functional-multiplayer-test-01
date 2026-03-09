@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal bullet_fired(position:Vector2, direction:Vector2, rotation:float)
 
 const SPEED = 100
+var health:float = 100
 
 # Set by the authority, synchronized on spawn.
 @export var player := 1 :
@@ -37,3 +38,10 @@ func _physics_process(_delta):
 
 	move_and_slide()
 	look_at(input_mouse)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(damage:float):
+	self.health = self.health - damage
+	print("Player ", self, " suffered ", str(damage), " damage.")
+	print("Health = ", int(self.health))

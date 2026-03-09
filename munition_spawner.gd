@@ -15,11 +15,10 @@ func add_bullet(position:Vector2, direction:Vector2, rotation:float):
 	if not multiplayer.is_server():
 		return
 	
-	var bullet : RigidBody2D = preload(bullet_scene).instantiate()
+	var bullet : Area2D = preload(bullet_scene).instantiate()
 
 	# Spawn bullet with impulse.
-	bullet.position = position
-	bullet.rotation = rotation
-	bullet.apply_impulse(direction, position)
+	bullet.init(position, direction, rotation)
+	
 	spawn_node.add_child(bullet, true)
 	print("Bullet spawned by ", multiplayer.get_unique_id())
