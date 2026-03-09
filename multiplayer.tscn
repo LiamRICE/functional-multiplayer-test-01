@@ -20,7 +20,6 @@ script = ExtResource("2_wktud")
 
 [node name="MainUI" type="CanvasLayer" parent="UI" unique_id=1223499144]
 unique_name_in_owner = true
-visible = false
 
 [node name="Net" type="VBoxContainer" parent="UI/MainUI" unique_id=829517810]
 offset_right = 290.0
@@ -64,6 +63,7 @@ text = "Save Settings"
 
 [node name="GameMenuUI" type="CanvasLayer" parent="UI" unique_id=122224958]
 unique_name_in_owner = true
+visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/GameMenuUI" unique_id=1335649723]
 offset_right = 40.0

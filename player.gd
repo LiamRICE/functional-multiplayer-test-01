@@ -43,5 +43,6 @@ func _physics_process(_delta):
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(damage:float):
 	self.health = self.health - damage
+	$HealthBar.value = self.health
 	print("Player ", self, " suffered ", str(damage), " damage.")
 	print("Health = ", int(self.health))
