@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal bullet_fired(position:Vector2, direction:Vector2, rotation:float)
 
 const SPEED = 100
-var health:float = 100
+@export var health:float = 100
 
 # Set by the authority, synchronized on spawn.
 @export var player := 1 :
