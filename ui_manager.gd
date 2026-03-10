@@ -5,6 +5,7 @@ var SettingsUI:CanvasLayer
 var GameMenuUI:CanvasLayer
 var CreateServerUI:CanvasLayer
 var JoinServerUI:CanvasLayer
+var GameplayUI:CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,6 +14,7 @@ func _ready() -> void:
 	GameMenuUI = %GameMenuUI
 	CreateServerUI = %CreateServerUI
 	JoinServerUI = %JoinServerUI
+	GameplayUI = %GameplayUI
 	return_to_main_menu()
 
 
@@ -61,10 +63,12 @@ func _on_connect_pressed() -> void:
 
 func _on_start_server_button_pressed() -> void:
 	CreateServerUI.visible = false
+	GameplayUI.visible = true
 
 
 func _on_join_server_button_pressed() -> void:
 	JoinServerUI.visible = false
+	GameplayUI.visible = true
 
 
 func return_to_main_menu() -> void:
@@ -73,7 +77,9 @@ func return_to_main_menu() -> void:
 	GameMenuUI.visible = false
 	CreateServerUI.visible = false
 	JoinServerUI.visible = false
+	GameplayUI.visible = false
 
 
 func _on_singleplayer_pressed() -> void:
 	MainUI.visible = false
+	GameplayUI.visible = true

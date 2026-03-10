@@ -10,6 +10,9 @@ var steam_initialised:bool = false
 var lobby_id:int = -1
 var is_joining:bool = false
 
+# Player variables
+var player_name:String = "Player"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Start paused.
@@ -34,6 +37,9 @@ func _ready() -> void:
 	Steam.initRelayNetworkAccess()
 	Steam.lobby_created.connect(_on_steam_lobby_created)
 	Steam.lobby_joined.connect(_on_steam_lobby_joined)
+	
+	# initialise player name variable
+	$UI/MainUI/Net/Options/PlayerNameInput.text = self.player_name
 
 
 func _on_host_pressed() -> void:
@@ -135,6 +141,7 @@ func start_game():
 	# Unpause to start the game.
 	get_tree().paused = false
 	paused = false
+	%GameplayUI.initialise_game_ui(self.player_name)
 	# Only change level on the server.
 	# Clients will instantiate the level via the spawner.
 	if multiplayer.is_server() or is_multiplayer == false:
@@ -216,3 +223,7 @@ func get_steam_lobby_info() -> Dictionary:
 		"lobby_id": self.lobby_id
 	}
 	return lobby_info
+
+
+func _on_player_name_input_text_changed() -> void:
+	self.player_name = $UI/MainUI/Net/Options/PlayerNameInput.text
