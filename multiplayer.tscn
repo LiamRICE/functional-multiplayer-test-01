@@ -175,7 +175,7 @@ text = "Join Server"
 layout_mode = 2
 text = "Menu"
 
-[node name="GameplayUI" type="CanvasLayer" parent="UI" unique_id=1215125773]
+[node name="GameplayUI" type="CanvasLayer" parent="UI" unique_id=1215125773 groups=["GameplayUI"]]
 unique_name_in_owner = true
 script = ExtResource("3_5bi2t")
 
