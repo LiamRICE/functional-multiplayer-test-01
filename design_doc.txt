@@ -1,0 +1,62 @@
+Ship Architecture Ideas
+
+Ship contains a number of Room Slots and Dedicated Slots
+- Each room slot can contain a function room
+- Dedicated slots already have a room wired in and cannot be changed
+- Ship and Rooms can have hardpoints that can store weapons
+- Ship and Rooms can have integrated or core weapon systems (centreline railgun, PDS, VLS, etc...)
+
+class Ship:
+    dedicated_room : List[Room]
+    room_slot : List[Room]
+    doors : List[Door] (to track atmosphere spread ship-wide)
+
+Ships are stored as a Resource (w/ Scene)
+- Rooms are identified by their Resource
+Rooms are stored as a Resource (w/ Scene)
+Weapons are stored as a Resource (w/ Scenes - Weapon & Munition)
+
+Room provides functions the Ship can use to operate, and affect the ship with events they can trigger.
+Ship affecting functions (damage, loss of atmosphere, etc...)
+- Ship => Room.function() (ex: atmosphere generation, power generation, etc...)
+- Ship => Room.event_signal.connect(ship_function) (ex: hull breach, ship damage, fire, etc...)
+- Room => self.function()
+- Room => Room.function()
+
+Ship Upgrade Ideas:
+- Ship Armour
+- Ship Power Delivery System
+- Ship Atmosphere Distribution System
+- Fire Suppression System
+
+Room Ideas:
+- Atmosphere Generation (vacuum, air, CO2) - (pumped throughout the ship, low power mode pumps only into O2 room, power off stops pumping)
+- Weapons (used for offense / defense)
+- Fire Control Centre (centralised weapon management system, if not weapon control is individual to each weapon)
+- Power Systems (used to power systems in the ship)
+- Propulsion (engines used to move between systems)
+- Command & Control (RADAR View,)
+- Armoury
+- Production
+- Repair Centre
+- Drone Control
+- Information Warfare Centre
+- Radiators
+- Stowage
+
+Weapon Ideas:
+- Centreline Railgun (very long range high damage kinetic fire weapon)
+- Vertical Launch System (multiple missile options for Offense & Defense, very long range)
+- Poind Defense System (high rate-of-fire cannon to intercept missiles, short range)
+- Turreted Missile Launch System (specialised for defense and anti-drone operations, longer range)
+- Cannon (multiple calibres, dual or triple barrel, medium range explosive shell cannon)
+- Coilgun (smaller calibre high rate-of-fire kinetic weapon, long range)
+- Laser Cannon (high-power long-range long fire-duration weapon that applies heat to the target area)
+- Laser PD (high-power short range laser weapon specialised in anti-missile / anti-drone defense)
+
+Hardpoint Ideas:
+- Sensors (RADAR, EM sensors, Laser Designator, etc...)
+- Missile
+- Missile Pod
+- Point Defense System
+- Laser Point Defense
