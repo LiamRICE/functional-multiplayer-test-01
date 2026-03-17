@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>160</y>
+      <w>340</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Ship
+--
+size_1_hardpoints : int
+size_2_hardpoints : int
+size_3_hardpoints : int
+rooms : Array[Room]
+weapons : Array[Weapon]
+armour_thickness : float
+armour_type : ArmourType
+--
+get_room_of_type(RoomType) -&gt; Room
+get_total_power() -&gt; float
+get_available_power() -&gt; float
+set_power_budget(Room, float)
+get_atmosphere_generation() -&gt; dict</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>460</y>
+      <w>220</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Weapon
+--
+size : int
+type : WeaponType
+damage : float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>460</y>
+      <w>230</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>WeaponType
+--
+MISSILE
+TORPEDO
+RAILGUN
+COILGUN
+LASER
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>160</y>
+      <w>230</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Room
+--
+name : String
+power_requirement : float
+power_budget : float
+functioning : float
+weapons : Array[Weapon]
+--
+set_function(float) -&gt; float
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>330</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..n</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>380</y>
+      <w>60</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>530</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>390</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;40.0;220.0;40.0;220.0;10.0</additional_attributes>
+  </element>
+</diagram>
