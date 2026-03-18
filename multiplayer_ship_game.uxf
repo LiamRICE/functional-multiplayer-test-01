@@ -20,7 +20,7 @@ armour_thickness : float
 armour_type : ArmourType
 --
 get_room_of_type(RoomType) -&gt; Room
-get_total_power() -&gt; float
+get_total_power_consuption() -&gt; float
 get_available_power() -&gt; float
 set_power_budget(Room, float)
 get_atmosphere_generation() -&gt; dict</panel_attributes>
@@ -96,7 +96,7 @@ m1=1..n</panel_attributes>
     <coordinates>
       <x>210</x>
       <y>380</y>
-      <w>60</w>
+      <w>50</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://mj551rqyj8pj"]
+
+[ext_resource type="Script" uid="uid://c1se84cebcdry" path="res://ship/rooms/power_room.gd" id="1_6o6qw"]
+
+[node name="PowerRoom" type="Node2D" unique_id=347984121]
+script = ExtResource("1_6o6qw")

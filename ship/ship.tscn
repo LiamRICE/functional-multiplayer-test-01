@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ck1x2x7i0yoat"]
+
+[ext_resource type="Script" uid="uid://bx87ygklwyhtk" path="res://ship/ship.gd" id="1_jgjpc"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ojhhw"]
+
+[node name="Ship" type="Node2D" unique_id=225402639]
+script = ExtResource("1_jgjpc")
+
+[node name="Rooms" type="Node2D" parent="." unique_id=716415063]
+
+[node name="Weapons" type="Node2D" parent="." unique_id=1443984271]
+
+[node name="ShipSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=683053777]
+replication_config = SubResource("SceneReplicationConfig_ojhhw")
+
+[node name="RoomSpawner" type="MultiplayerSpawner" parent="." unique_id=202665091]
+spawn_path = NodePath("../Rooms")
+
+[node name="WeaponSpawner" type="MultiplayerSpawner" parent="." unique_id=470283359]
+spawn_path = NodePath("../Weapons")
