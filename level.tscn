@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dsqwyg2qkeyf0"]
 
-[ext_resource type="PackedScene" uid="uid://dnltddkrlb3r2" path="res://image.tscn" id="1_u52ul"]
 [ext_resource type="Script" uid="uid://dobgpj41nq1ir" path="res://level.gd" id="1_vonw3"]
 [ext_resource type="Script" uid="uid://ddegdueujrvgn" path="res://multiplayer_spawner.gd" id="3_oi3di"]
 [ext_resource type="Script" uid="uid://cj2rgs7uejo7n" path="res://munition_spawner.gd" id="4_0b4ue"]
@@ -8,12 +7,11 @@
 [node name="Level" type="Node2D" unique_id=977350188]
 script = ExtResource("1_vonw3")
 
-[node name="Image" parent="." unique_id=252393707 instance=ExtResource("1_u52ul")]
-z_index = -1
-
 [node name="Players" type="Node2D" parent="." unique_id=595532297]
 
 [node name="Munitions" type="Node2D" parent="." unique_id=388382696]
+
+[node name="Ships" type="Node2D" parent="." unique_id=204078629]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=132492835]
 _spawnable_scenes = PackedStringArray("uid://bpfdforyn3j2")
@@ -25,3 +23,6 @@ script = ExtResource("3_oi3di")
 _spawnable_scenes = PackedStringArray("uid://bykowjorgwesn")
 spawn_path = NodePath("../Munitions")
 script = ExtResource("4_0b4ue")
+
+[node name="ShipSpawner" type="MultiplayerSpawner" parent="." unique_id=1337443550]
+spawn_path = NodePath("../Ships")
