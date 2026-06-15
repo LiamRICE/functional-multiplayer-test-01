@@ -39,6 +39,9 @@ func _ready() -> void:
 	Steam.lobby_joined.connect(_on_steam_lobby_joined)
 	
 	# initialise player name variable
+	var saved_name = SaveUtils.read_player_setting("player_name")
+	if saved_name != null:
+		self.player_name = saved_name
 	$UI/MainUI/Net/Options/PlayerNameInput.text = self.player_name
 
 
@@ -227,3 +230,4 @@ func get_steam_lobby_info() -> Dictionary:
 
 func _on_player_name_input_text_changed() -> void:
 	self.player_name = $UI/MainUI/Net/Options/PlayerNameInput.text
+	SaveUtils.write_player_setting("player_name", self.player_name)

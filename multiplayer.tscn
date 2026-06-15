@@ -23,11 +23,29 @@ script = ExtResource("2_wktud")
 unique_name_in_owner = true
 
 [node name="Net" type="VBoxContainer" parent="UI/MainUI" unique_id=829517810]
-offset_right = 290.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
-[node name="Options" type="HBoxContainer" parent="UI/MainUI/Net" unique_id=1105222295]
+[node name="TitleMarginContainer" type="MarginContainer" parent="UI/MainUI/Net" unique_id=495626033]
 layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="TitleLabel" type="Label" parent="UI/MainUI/Net/TitleMarginContainer" unique_id=1422030850]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Multiplayer Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="UI/MainUI/Net" unique_id=305114403]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Singleplayer" type="Button" parent="UI/MainUI/Net/Options" unique_id=1811942983]
 unique_name_in_owner = true
@@ -52,9 +70,14 @@ text = "Settings"
 layout_mode = 2
 text = "Quit Game"
 
-[node name="PlayerNameInput" type="TextEdit" parent="UI/MainUI/Net/Options" unique_id=1217259219]
-custom_minimum_size = Vector2(200, 0)
+[node name="Label" type="Label" parent="UI/MainUI/Net/Options" unique_id=1170255255]
 layout_mode = 2
+text = "Player Name"
+
+[node name="PlayerNameInput" type="TextEdit" parent="UI/MainUI/Net/Options" unique_id=1217259219]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_vertical = 4
 
 [node name="SettingsUI" type="CanvasLayer" parent="UI" unique_id=950344025]
 unique_name_in_owner = true
@@ -177,6 +200,7 @@ text = "Menu"
 
 [node name="GameplayUI" type="CanvasLayer" parent="UI" unique_id=1215125773 groups=["GameplayUI"]]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("3_5bi2t")
 
 [node name="BottomRightBar" type="VBoxContainer" parent="UI/GameplayUI" unique_id=1511095435]
